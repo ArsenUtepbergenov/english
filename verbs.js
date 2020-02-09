@@ -1,5 +1,6 @@
 const COUNT_VERBS = 100
-const verbs = `{
+const VerbForms = {INFINITIVE: 'Infinitive', PAST_SIMPLE: 'Past Simple', PAST_PARTICIPLE: 'Past Participle'}
+const irregularVerbs = `{
   "Infinitive": [
     "be",
     "beat",
@@ -308,4 +309,4 @@ const verbs = `{
   ]
 }`
 
-export {COUNT_VERBS, verbs}
+export {COUNT_VERBS, VerbForms, irregularVerbs}
