@@ -1,10 +1,9 @@
 {
-  "name": "webgl2",
+  "name": "english-verbs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A simple site for english verbs",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Arsen",
   "license": "ISC"
