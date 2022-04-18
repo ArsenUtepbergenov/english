@@ -2,14 +2,11 @@ import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NavLink } from 'react-router-dom'
 import { AcademicCapIcon } from '@heroicons/react/outline'
+import { classNames } from 'utils'
 
 const navigation = [
-  { name: 'Verbs', to: '/verbs' }
+  { name: 'Forms of verb', to: '/forms-verb' }
 ]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export default function Header() {
   return (

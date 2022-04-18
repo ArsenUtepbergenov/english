@@ -14,9 +14,9 @@ function App() {
         <Route path="/edit-user/:id" element={<EditUser />} /> */}
         <Route
           path="*"
-          element={<Navigate to="/verbs" replace />}
+          element={<Navigate to="/forms-verb" replace />}
         />
-        <Route path="/verbs" element={<Verbs />} />
+        <Route path="/forms-verb" element={<Verbs />} />
       </Routes>
     </div>
   );
