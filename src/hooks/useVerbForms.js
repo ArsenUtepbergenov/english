@@ -47,6 +47,8 @@ function useVerbForms() {
 
   return {
     infinitive,
+    pastSimpleVerb,
+    pastParticipleVerb,
     checkPastSimple,
     checkPastParticiple,
     generateRandomVerb,

@@ -1,10 +1,12 @@
+import { useCallback, useEffect, useRef } from 'react'
 import TextField from 'components/TextField'
 import useVerbForms from 'hooks/useVerbForms'
+import useCounter from 'hooks/useCounter'
 import Button from 'components/Button'
-import { useCallback, useEffect, useRef } from 'react'
 
 const Verbs = () => {
   const verbForms = useVerbForms()
+  const counter = useCounter()
   const pastSimple = useRef(null)
   const pastParticiple = useRef(null)
 
@@ -17,12 +19,17 @@ const Verbs = () => {
   }
 
   const handleGenerateVerb = useCallback(() => {
+    if (verbForms.infinitive &&
+        verbForms.pastSimpleVerb === pastSimple.current.value &&
+        verbForms.pastParticipleVerb === pastParticiple.current.value) {
+      counter.add(1)
+    }
     verbForms.generateRandomVerb()
     pastSimple.current.value = ''
     pastParticiple.current.value = ''
     verbForms.resetStyle(pastSimple.current)
     verbForms.resetStyle(pastParticiple.current)
-  }, [verbForms])
+  }, [verbForms, counter])
 
   const handleEnterPress = useCallback((e) => {
     if (e.keyCode === 13) {
@@ -54,7 +61,7 @@ const Verbs = () => {
             placeholder: 'Past Simple...',
             disabled: !verbForms.infinitive ? true : false
           }}
-          onChange={handlePastSimpleChange}
+          change={handlePastSimpleChange}
         />
         <TextField
           ref={pastParticiple}
@@ -64,10 +71,13 @@ const Verbs = () => {
             placeholder: 'Past Participle...',
             disabled: !verbForms.infinitive ? true : false
           }}
-          onChange={handlePastParticipleChange}
+          change={handlePastParticipleChange}
         />
       </div>
-      <Button click={handleGenerateVerb}>New Verb</Button>
+      <div className='flex items-center'>
+        <Button click={handleGenerateVerb}>New Verb</Button>
+        <p className='ml-10'><b>Score: {counter.count}</b></p>
+      </div>
       <p className="text-gray-400">Press <b>'Enter'</b> to next verb...</p>
     </div>
   )
