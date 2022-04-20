@@ -1,11 +1,11 @@
-import { Disclosure } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NavLink } from 'react-router-dom'
-import { AcademicCapIcon } from '@heroicons/react/outline'
+import { Disclosure } from '@headlessui/react'
+import { MenuIcon, XIcon, AcademicCapIcon } from '@heroicons/react/outline'
 import { classNames } from 'utils'
 
 const navigation = [
-  { name: 'Forms of verb', to: '/forms-verb' }
+  { name: 'Forms of verb', to: '/forms-verb' },
+  { name: 'Vocabulary quiz', to: '/vocabulary-quiz' },
 ]
 
 export default function Header() {

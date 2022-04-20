@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { COUNT_VERBS, VerbForms, irregularVerbs } from 'data/verbs.js'
+import { COUNT_VERBS, VerbForms, irregularVerbs } from 'assets/data/verbs.js'
 
 const verbs = JSON.parse(irregularVerbs)
 const infinitiveVerbs = verbs[VerbForms.INFINITIVE]

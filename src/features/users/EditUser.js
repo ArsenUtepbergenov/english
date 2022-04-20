@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import TextField from '../../components/TextField'
-import Button from '../../components/Button'
+import TextField from 'components/Fields/TextField'
+import Button from 'components/Buttons/Button'
 import { useSelector, useDispatch } from "react-redux"
 import { editUser } from './userSlice'
 

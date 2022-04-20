@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Button from "../../components/Button"
+import Button from "components/Buttons/Button"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteUser } from "./userSlice"
 import { PencilIcon, TrashIcon } from '@heroicons/react/outline'

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react'
-import TextField from 'components/TextField'
+import TextField from 'components/Fields/TextField'
 import useVerbForms from 'hooks/useVerbForms'
 import useCounter from 'hooks/useCounter'
-import Button from 'components/Button'
+import Button from 'components/Buttons/Button'
 
 const Verbs = () => {
   const verbForms = useVerbForms()
