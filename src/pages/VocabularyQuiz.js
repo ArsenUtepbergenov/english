@@ -38,7 +38,7 @@ function VocabularyQuiz() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 text-gray-500">
+    <div className="max-w-7xl mx-auto px-6 text-gray-500">
       <div>
         <h1 className="text-center text-3xl mt-8">Select translation of "{question?.word}"</h1>
         <div className="grid grid-cols-3 gap-5 grid-flow-row auto-rows-auto mt-8">
