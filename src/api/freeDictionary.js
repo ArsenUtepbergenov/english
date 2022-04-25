@@ -1,9 +1,6 @@
-const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
+import { STATUSES } from 'models/api'
 
-const STATUSES = {
-  success: 200,
-  fail: 404
-}
+const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
 
 export async function fetchDefinition(word) {
   try {

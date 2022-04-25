@@ -1,10 +1,12 @@
 import { useRef, useState } from "react"
 import Button from "components/Buttons/Button"
 import TextField from "components/Fields/TextField"
+import SimpleList from "components/Lists/SimpleList"
 import useDictionary from "hooks/useDictionary"
+import { PartOfSpeech } from 'models/dictionary'
 
 function Dictionary() {
-  const { definitions, fetch } = useDictionary()
+  const { fetch, getMeaningsByPartOfSpeech } = useDictionary()
   const [nouns, setNouns] = useState([])
   const inputRef = useRef()
 
@@ -12,21 +14,9 @@ function Dictionary() {
     const word = inputRef.current.value
     if (word !== '') {
       await fetch(word)
-      getMeaningsByPartOfSpeech('noun', setNouns)
+      setNouns(getMeaningsByPartOfSpeech(PartOfSpeech.NOUN))
     } else
       return
-  }
-
-  const getMeaningsByPartOfSpeech = (partOfSpeech, set) => {
-    const result = []
-
-    if (definitions.current !== null) {
-      const temp = definitions.current[0]?.meanings.filter(meaning => meaning.partOfSpeech === partOfSpeech)
-      if (temp?.length) {
-        temp.forEach(item => result.push(item.definitions))
-        set(result.flat())
-      }
-    }
   }
 
   return (
@@ -41,11 +31,7 @@ function Dictionary() {
         </div>
       </div>
       <div className="definition">
-        {
-          nouns?.length ?
-            nouns.map(definition => <p key={definition.definition}>{definition.definition}</p>) :
-            null
-        }
+        <SimpleList items={nouns} prop="definition" />
       </div>
     </div>
   )
