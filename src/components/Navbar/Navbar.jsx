@@ -1,21 +1,22 @@
-import { NavLink } from 'react-router-dom'
-import { classNames } from 'utils'
+import { DefaultNavLink } from './navbar.style'
 import { navLinks } from './navLinks'
 
 function Navbar() {
+  const activeStyle = {
+    background: "#1f1a28",
+    borderRadius: 8
+  }
+
   return <>
     {navLinks.map((item) => (
-      <NavLink
+      <DefaultNavLink
         key={item.name}
         to={item.to}
-        className={({ isActive }) => classNames(
-          isActive ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-          'px-3 py-2 rounded-md text-sm font-medium'
-        )}
         aria-current={item.current ? 'page' : undefined}
+        style={({ isActive }) => isActive ? activeStyle : undefined }
       >
         {item.name}
-      </NavLink>
+      </DefaultNavLink>
     ))}
   </>
 }
