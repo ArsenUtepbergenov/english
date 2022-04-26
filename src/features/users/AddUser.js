@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import TextField from 'components/Fields/TextField'
-import Button from 'components/Buttons/Button'
+import DefaultTextField from 'components/Fields/DefaultTextField'
+import DefaultButton from 'components/Buttons/DefaultButton'
 import { useDispatch } from 'react-redux'
 import { addUser } from './userSlice'
 import { v4 as uuidv4 } from 'uuid'
@@ -34,20 +34,20 @@ const AddUser = () => {
 
   return (
     <div className="mt-10 max-w-xl mx-auto">
-      <TextField
+      <DefaultTextField
         label="Name"
         value={values.name}
         inputProps={{ type: 'text', placeholder: 'John' }}
         onChange={handleNameChange}
       />
       <br />
-      <TextField
+      <DefaultTextField
         label="Email"
         value={values.email}
         inputProps={{ type: 'email', placeholder: 'john@mail.com' }}
         onChange={handleEmailChange}
       />
-      <Button onClick={handleAddUser}>Submit</Button>
+      <DefaultButton onClick={handleAddUser}>Submit</DefaultButton>
     </div>
   )
 }

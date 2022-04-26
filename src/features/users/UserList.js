@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Button from "components/Buttons/Button"
+import DefaultButton from "components/Buttons/DefaultButton"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteUser } from "./userSlice"
 import { PencilIcon, TrashIcon } from '@heroicons/react/outline'
@@ -34,7 +34,7 @@ const UserList = () => {
   return (
     <div>
       <Link to="/add-user">
-        <Button>Add User</Button>
+        <DefaultButton>Add User</DefaultButton>
       </Link>
       <div className="grid gap-5 md:grid-cols-2">
         {users.length ? renderCard() : 

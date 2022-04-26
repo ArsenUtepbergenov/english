@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
-import Button from "components/Buttons/Button"
-import TextField from "components/Fields/TextField"
+import { InputAdornment, IconButton, Box, Grid } from "@mui/material"
+import { SearchOutlined } from '@mui/icons-material'
+import DefaultTextField from "components/Fields/DefaultTextField"
 import SimpleList from "components/Lists/SimpleList"
 import useDictionary from "hooks/useDictionary"
 import { PartOfSpeech } from 'models/dictionary'
@@ -20,20 +21,30 @@ function Dictionary() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="max-w-xs mx-auto flex items-center">
-        <TextField
-          ref={inputRef}
-          inputProps={{ type: 'text', placeholder: 'Word...', }}
-        />
-        <div className="ml-3 mt-2">
-          <Button click={handleSearch}>Search</Button>
-        </div>
-      </div>
-      <div className="definition">
+    <section>
+      <Grid container justifyContent="center" spacing={2}>
+        <Grid item>
+          <DefaultTextField
+            ref={inputRef}
+            inputProps={{ type: 'text', placeholder: 'Word...', }}
+            endIconButton={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="search"
+                  onClick={handleSearch}
+                  edge="end"
+                >
+                  <SearchOutlined />
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </Grid>
+      </Grid>
+      <Box mt={2}>
         <SimpleList items={nouns} prop="definition" />
-      </div>
-    </div>
+      </Box>
+    </section>
   )
 }
 

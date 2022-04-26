@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import TextField from 'components/Fields/TextField'
-import Button from 'components/Buttons/Button'
+import DefaultTextField from 'components/Fields/DefaultTextField'
+import DefaultButton from 'components/Buttons/DefaultButton'
 import { useSelector, useDispatch } from "react-redux"
 import { editUser } from './userSlice'
 
@@ -41,20 +41,20 @@ const EditUser = () => {
 
   return (
     <div className="mt-10 max-w-xl mx-auto">
-      <TextField
+      <DefaultTextField
         label="Name"
         value={values.name}
         inputProps={{ type: 'text', placeholder: 'John' }}
         onChange={handleNameChange}
       />
       <br />
-      <TextField
+      <DefaultTextField
         label="Email"
         value={values.email}
         inputProps={{ type: 'email', placeholder: 'john@mail.com' }}
         onChange={handleEmailChange}
       />
-      <Button onClick={handleEditUser}>Edit</Button>
+      <DefaultButton onClick={handleEditUser}>Edit</DefaultButton>
     </div>
   )
 }
