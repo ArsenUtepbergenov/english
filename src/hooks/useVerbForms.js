@@ -19,7 +19,7 @@ function useVerbForms() {
   }
 
   const resetStyle = (target) => {
-    target.style = ''
+    target.style = { background: 'unset' }
   }
 
   const parse = (target) => {
