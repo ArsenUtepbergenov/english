@@ -1,16 +1,21 @@
-import { STATUSES } from 'models/api'
+import { Statuses } from 'models/api'
 
 const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
 
 export async function fetchDefinition(word) {
   try {
     const data = await fetch(`${url}${word}`)
-    if (data?.status === STATUSES.success)
-      return await data.json()
-    else if (data?.status === STATUSES.fail)
-      throw new Error('No Definitions Found')
+
+    if (data) {
+      const result = await data.json()
+
+      if (data.status === Statuses.SUCCESSFUL)
+        return { isError: false, result }
+      else if (data.status === Statuses.FAILED)
+        throw new Error(result.title)
+    }
   } catch (error) {
     console.error(error)
-    return null
+    return { isError: true, error: error.message }
   }
 }

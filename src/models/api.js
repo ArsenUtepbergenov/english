@@ -1,4 +1,4 @@
-export const STATUSES = {
-  success: 200,
-  fail: 404
+export const Statuses = {
+  SUCCESSFUL: 200,
+  FAILED: 404
 }

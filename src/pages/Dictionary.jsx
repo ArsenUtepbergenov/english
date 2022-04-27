@@ -1,14 +1,15 @@
 import { useRef, useState } from "react"
-import { InputAdornment, IconButton, Box, Grid } from "@mui/material"
+import { InputAdornment, IconButton, Box, Grid, Typography } from "@mui/material"
 import { SearchOutlined } from '@mui/icons-material'
 import DefaultTextField from "components/Fields/DefaultTextField"
 import DictionaryDefinitions from 'components/Containers/DictionaryDefinitions'
 import useDictionary from "hooks/useDictionary"
 import { getPartsOfSpeechAsValues, PartOfSpeech } from 'models/dictionary'
 import { KeyCode } from "models/common"
+import DefaultAudioPlayer from "components/Media/DefaultAudioPlayer"
 
 function Dictionary() {
-  const { fetch, getMeanings } = useDictionary()
+  const { error, fetch, getMeanings, getAudioUrl, getPhonetics } = useDictionary()
   const inputRef = useRef()
   const [prevWord, setPrevWord] = useState('')
   const [definitions, setDefinitions] = useState(new Map())
@@ -37,7 +38,12 @@ function Dictionary() {
 
   return (
     <section>
-      <Grid container justifyContent="center" spacing={2}>
+      <Grid
+        container
+        direction="column"
+        alignContent="center"
+        spacing={2}
+      >
         <Grid item>
           <DefaultTextField
             ref={inputRef}
@@ -55,6 +61,23 @@ function Dictionary() {
               </InputAdornment>
             }
           />
+        </Grid>
+        <Grid item>
+          {
+            error ?
+              <Typography
+                variant="h6"
+                component="span"
+                sx={{ color: '#d32f2f' }}
+              >
+                {error}
+              </Typography> :
+              <DefaultAudioPlayer
+                word={prevWord}
+                phonetics={getPhonetics()}
+                audioUrl={getAudioUrl()}
+              />
+          }
         </Grid>
       </Grid>
       <Box mt={5}>
