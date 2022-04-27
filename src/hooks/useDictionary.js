@@ -10,7 +10,7 @@ function useDictionary() {
     definitions.current = await fetchDefinition(word)
   }
 
-  const getMeaningsByPartOfSpeech = (partOfSpeech) => {
+  const getMeanings = (partOfSpeech) => {
     const result = []
 
     if (definitions.current !== null) {
@@ -26,7 +26,7 @@ function useDictionary() {
 
   return {
     fetch,
-    getMeaningsByPartOfSpeech
+    getMeanings
   }
 }
 

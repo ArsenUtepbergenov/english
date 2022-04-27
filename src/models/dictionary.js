@@ -1,3 +1,7 @@
+export function getPartsOfSpeechAsValues() {
+  return Object.values(PartOfSpeech)
+}
+
 export const PartOfSpeech = {
   NOUN: 'noun',
   PRONOUN: 'pronoun',
@@ -7,5 +11,17 @@ export const PartOfSpeech = {
   PREPOSITION: 'preposition',
   CONJUNCTION: 'conjunction',
   INTERJECTION: 'interjection',
-  DETERMINER: 'determiner',
+  NUMERAL: 'numeral',
+}
+
+export const DefinitionItemColor = {
+  [PartOfSpeech.NOUN]: '#689f38',
+  [PartOfSpeech.PRONOUN]: '#5d4037',
+  [PartOfSpeech.VERB]: '#0288d1',
+  [PartOfSpeech.ADJECTIVE]: '#ffa000',
+  [PartOfSpeech.ADVERB]: '#616161',
+  [PartOfSpeech.PREPOSITION]: '#455a64',
+  [PartOfSpeech.CONJUNCTION]: '#afb42b',
+  [PartOfSpeech.INTERJECTION]: '#00796b',
+  [PartOfSpeech.NUMERAL]: '#d32f2f',
 }
