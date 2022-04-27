@@ -1,28 +1,31 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useMemo } from "react"
 import { InputAdornment, IconButton, Box, Grid, Typography } from "@mui/material"
 import { SearchOutlined } from '@mui/icons-material'
 import DefaultTextField from "components/Fields/DefaultTextField"
 import DictionaryDefinitions from 'components/Containers/DictionaryDefinitions'
-import useDictionary from "hooks/useDictionary"
-import { getPartsOfSpeechAsValues, PartOfSpeech } from 'models/dictionary'
-import { KeyCode } from "models/common"
 import DefaultAudioPlayer from "components/Media/DefaultAudioPlayer"
+import useDictionary from "hooks/useDictionary"
+import { getPartsOfSpeechAsValues } from 'models/dictionary'
+import { KeyCode } from "models/common"
 
 function Dictionary() {
   const { error, fetch, getMeanings, getAudioUrl, getPhonetics } = useDictionary()
   const inputRef = useRef()
+  const columns = useRef(0)
   const [prevWord, setPrevWord] = useState('')
   const [definitions, setDefinitions] = useState(new Map())
 
   const handleSearch = async () => {
     const word = inputRef.current.value
+
     if (word === prevWord)
       return
-    if (word !== '') {
+    else if (word !== '') {
       await fetch(word)
-      for (const partOfSpeech of getPartsOfSpeechAsValues()) {
+
+      for (const partOfSpeech of getPartsOfSpeechAsValues())
         setDefinitions(new Map(definitions.set(partOfSpeech, getMeanings(partOfSpeech))))
-      }
+
       setPrevWord(word)
     } else
       return
@@ -34,6 +37,28 @@ function Dictionary() {
       e.stopPropagation()
       handleSearch()
     }
+  }
+
+  const getPartsOfSpeech = useMemo(() => {
+    let result = {}
+    columns.current = 0
+
+    for (const partOfSpeech of getPartsOfSpeechAsValues()) {
+      const temp = definitions.get(partOfSpeech)
+
+      if (temp?.length) {
+        result = { ...result, [partOfSpeech]: temp }
+        columns.current++
+      }
+    }
+
+    return result
+  }, [definitions])
+
+  const getNumberOfColumns = () => {
+    if (columns.current >= 3) return 3
+    else if (columns.current === 2) return 2
+    else return 1
   }
 
   return (
@@ -81,17 +106,10 @@ function Dictionary() {
         </Grid>
       </Grid>
       <Box mt={5}>
-        <DictionaryDefinitions partsOfSpeech={{
-          [PartOfSpeech.NOUN]: definitions.get(PartOfSpeech.NOUN),
-          [PartOfSpeech.PRONOUN]: definitions.get(PartOfSpeech.PRONOUN),
-          [PartOfSpeech.PREPOSITION]: definitions.get(PartOfSpeech.PREPOSITION),
-          [PartOfSpeech.VERB]: definitions.get(PartOfSpeech.VERB),
-          [PartOfSpeech.ADVERB]: definitions.get(PartOfSpeech.ADVERB),
-          [PartOfSpeech.ADJECTIVE]: definitions.get(PartOfSpeech.ADJECTIVE),
-          [PartOfSpeech.INTERJECTION]: definitions.get(PartOfSpeech.INTERJECTION),
-          [PartOfSpeech.CONJUNCTION]: definitions.get(PartOfSpeech.CONJUNCTION),
-          [PartOfSpeech.NUMERAL]: definitions.get(PartOfSpeech.NUMERAL),
-        }}/>
+        <DictionaryDefinitions
+          partsOfSpeech={getPartsOfSpeech}
+          columns={getNumberOfColumns()}
+        />
       </Box>
     </section>
   )
