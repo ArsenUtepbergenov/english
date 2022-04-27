@@ -4,7 +4,7 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import SimpleList from "components/Lists/SimpleList"
 import { DefinitionItemColor, PartOfSpeech } from 'models/dictionary'
 
-function DictionaryDefinitions({ partsOfSpeech }) {
+function DictionaryDefinitions({ partsOfSpeech, columns }) {
   const getBgColor = (partOfSpeech) => {
     return DefinitionItemColor[partOfSpeech]
   }
@@ -33,7 +33,7 @@ function DictionaryDefinitions({ partsOfSpeech }) {
 
   return (
     <Masonry
-      columns={{ xs: 1, md: 3 }}
+      columns={{ xs: 1, md: columns }}
       spacing={2}
       sx={{ color: 'white' }}
     >
