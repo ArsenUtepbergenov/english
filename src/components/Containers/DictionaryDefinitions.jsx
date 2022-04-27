@@ -1,5 +1,6 @@
 import { Masonry } from "@mui/lab"
 import { Box, capitalize, Typography } from "@mui/material"
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import SimpleList from "components/Lists/SimpleList"
 import { DefinitionItemColor, PartOfSpeech } from 'models/dictionary'
 
@@ -10,16 +11,23 @@ function DictionaryDefinitions({ partsOfSpeech }) {
 
   const getItem = (partOfSpeech) => {
     const items = partsOfSpeech[partOfSpeech]
+    const length = items?.length
 
     return (
-      <Box sx={{ p: 1, maxHeight: 360, overflowY: 'auto', bgcolor: getBgColor(partOfSpeech) }}>
-        <Typography variant="h6" align="center">{capitalize(`${partOfSpeech}s`)}</Typography>
+      <>
         {
-          items?.length ?
-            <SimpleList items={items} prop="definition" /> :
-            <Box component="span" sx={{ pl: '1.4em' }}>No Definitions</Box>
+          length ?
+            <Box sx={{ p: 1, maxHeight: 360, overflowY: 'auto', bgcolor: getBgColor(partOfSpeech) }}>
+              <Typography variant="h6" align="center">{capitalize(`${partOfSpeech}s`)}</Typography>
+              {
+                length ?
+                  <SimpleList items={items} prop="definition" /> :
+                  <Box sx={{ pl: '1.3em' }}><FormatListNumberedIcon /></Box>
+              }
+            </Box> :
+            null
         }
-      </Box>
+      </>
     )
   }
 
