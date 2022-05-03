@@ -6,8 +6,10 @@ const mainDefinition = 0
 function useDictionary() {
   const definitions = useRef(null)
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const fetch = async (word) => {
+    setLoading(true)
     const result = await fetchDefinition(word)
 
     if (result.isError)
@@ -16,6 +18,7 @@ function useDictionary() {
       definitions.current = result.result
       setError(null)
     }
+    setLoading(false)
   }
 
   const getAudioUrl = () => {
@@ -46,6 +49,7 @@ function useDictionary() {
 
   return {
     error,
+    loading,
     fetch,
     getMeanings,
     getAudioUrl,
