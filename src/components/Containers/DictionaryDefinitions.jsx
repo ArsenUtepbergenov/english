@@ -1,35 +1,33 @@
 import { Masonry } from "@mui/lab"
 import { Box, capitalize, Typography } from "@mui/material"
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import SimpleList from "components/Lists/SimpleList"
-import { DefinitionItemColor, PartOfSpeech } from 'models/dictionary'
+import { DefinitionItemColor, getPartsOfSpeechAsValues } from 'models/dictionary'
+import { useMemo, useState, useCallback } from "react"
 
 function DictionaryDefinitions({ partsOfSpeech, columns }) {
+  const [parts] = useState(() => getPartsOfSpeechAsValues())
+
   const getBgColor = (partOfSpeech) => {
     return DefinitionItemColor[partOfSpeech]
   }
 
-  const getItem = (partOfSpeech) => {
-    const items = partsOfSpeech[partOfSpeech]
-    const length = items?.length
-
+  const getItem = useCallback((definitions, partOfSpeech) => {
     return (
-      <>
-        {
-          length ?
-            <Box sx={{ p: 1, maxHeight: 360, overflowY: 'auto', bgcolor: getBgColor(partOfSpeech) }}>
-              <Typography variant="h6" align="center">{capitalize(`${partOfSpeech}s`)}</Typography>
-              {
-                length ?
-                  <SimpleList items={items} prop="definition" /> :
-                  <Box sx={{ pl: '1.3em' }}><FormatListNumberedIcon /></Box>
-              }
-            </Box> :
-            null
-        }
-      </>
+      <Box sx={{ p: 1, maxHeight: 360, overflowY: 'auto', bgcolor: getBgColor(partOfSpeech) }}>
+        <Typography variant="h6" align="center">{capitalize(`${partOfSpeech}s`)}</Typography>
+        <SimpleList items={definitions} prop="definition" />
+      </Box>
     )
-  }
+  }, [])
+
+  const getItems = useMemo(() => {
+    return parts?.length ?
+      parts.map(part => {
+        const definitions = partsOfSpeech[part]
+        return definitions?.length ? <span key={part}>{getItem(definitions, part)}</span> : null
+      }) :
+      <></>
+  }, [parts, getItem, partsOfSpeech])
 
   return (
     <Masonry
@@ -37,15 +35,7 @@ function DictionaryDefinitions({ partsOfSpeech, columns }) {
       spacing={2}
       sx={{ color: 'white' }}
     >
-      { getItem(PartOfSpeech.NOUN) }
-      { getItem(PartOfSpeech.PRONOUN) }
-      { getItem(PartOfSpeech.PREPOSITION) }
-      { getItem(PartOfSpeech.VERB) }
-      { getItem(PartOfSpeech.ADVERB) }
-      { getItem(PartOfSpeech.ADJECTIVE) }
-      { getItem(PartOfSpeech.INTERJECTION) }
-      { getItem(PartOfSpeech.CONJUNCTION) }
-      { getItem(PartOfSpeech.NUMERAL) }
+      {getItems}
     </Masonry>
   )
 }
