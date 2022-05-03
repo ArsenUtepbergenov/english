@@ -1,4 +1,4 @@
-import { DefaultNavLink } from './navbar.style'
+import { DefaultNavLink } from './navbar.styles'
 import { navLinks } from './navLinks'
 
 function Navbar() {
