@@ -1,3 +1,3 @@
 export const KeyCode = {
-  ENTER: 13
+  ENTER: 13,
 }

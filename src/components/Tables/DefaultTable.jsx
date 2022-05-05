@@ -6,7 +6,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Typography
+  Typography,
 } from '@mui/material'
 import { StyledTableRow, StyledTableCell } from './defaultTable.styles'
 import { v4 as uuidv4 } from 'uuid'
@@ -21,38 +21,34 @@ export default function DefaultTable({ headerName = '', headers, rows }) {
         <TableHead>
           <TableRow>
             <StyledTableCell>{headerName}</StyledTableCell>
-            {
-              headersLength ?
-                headers.map(header =>
+            {headersLength
+              ? headers.map((header) => (
                   <StyledTableCell key={header} align="center">
                     {header}
-                  </StyledTableCell>) :
-                  null
-            }
+                  </StyledTableCell>
+                ))
+              : null}
           </TableRow>
         </TableHead>
         <TableBody>
-          {
-            rowsLength ?
-              rows.map(row => (
+          {rowsLength
+            ? rows.map((row) => (
                 <StyledTableRow key={row.name}>
                   <TableCell component="th" scope="row">
                     <Typography variant="subtitle2" component="span">
                       {row.name}
                     </Typography>
                   </TableCell>
-                  {
-                    headersLength ?
-                      headers.map((_, index) =>
+                  {headersLength
+                    ? headers.map((_, index) => (
                         <TableCell key={uuidv4()} align="center">
                           {row[headers[index]]}
-                        </TableCell>) :
-                      null
-                  }
+                        </TableCell>
+                      ))
+                    : null}
                 </StyledTableRow>
-              )) :
-              null
-          }
+              ))
+            : null}
         </TableBody>
       </Table>
     </TableContainer>

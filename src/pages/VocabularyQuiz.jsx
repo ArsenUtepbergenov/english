@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { Box, Typography, Grid } from '@mui/material'
 import DefaultCard from 'components/Cards/DefaultCard'
 import Score from 'components/Score/Score'
@@ -6,35 +6,22 @@ import DefaultButton from 'components/Buttons/DefaultButton'
 import useCounter from 'hooks/useCounter'
 import { getNextQuestion } from 'assets/img/quiz/quiz'
 
-const correctAnswerStyle = { outline: '#9fcd69 solid 4px' }
+const correctAnswerStyle = '#9fcd69 solid 4px'
 const initialQuestion = getNextQuestion(0)
 
 function VocabularyQuiz() {
   const counter = useCounter()
   const [question, setQuestion] = useState(initialQuestion)
-  const userAnswerId = useRef(null)
-
-  const resetStyle = () => {
-    question?.answers?.forEach((item) => (item.style = {}))
-  }
-
-  const highlightCard = (id) => {
-    resetStyle()
-    const temp = question?.answers?.find((item) => item.id === id)
-    if (temp) temp.style = correctAnswerStyle
-    setQuestion({ ...question, ...temp })
-  }
+  const [userAnswerId, setUserAnswerId] = useState(null)
 
   const handleCardClick = (id) => {
-    highlightCard(id)
-    userAnswerId.current = id
+    setUserAnswerId(id)
   }
 
   const handleAnswer = () => {
-    if (question.correctId === userAnswerId.current) {
+    if (question.correctId === userAnswerId) {
       setQuestion(getNextQuestion())
-      resetStyle()
-      userAnswerId.current = null
+      setUserAnswerId(null)
       counter.add(1)
     }
   }
@@ -48,14 +35,17 @@ function VocabularyQuiz() {
           </Typography>
         </Box>
         <Grid container spacing={3}>
-          {question?.answers?.map((answer) => (
-            <Grid key={answer.text} item xs={12} md={4}>
-              <DefaultCard
-                img={answer.img}
-                title={answer.text}
-                style={answer.style}
-                click={() => handleCardClick(answer.id)}
-              />
+          {question?.answers?.map(({ id, img, text }) => (
+            <Grid key={text} item xs={12} md={4}>
+              <Box
+                sx={{ minWidth: '300px', width: 'max-content', margin: 'auto' }}
+                style={{
+                  outline: id === userAnswerId ? `${correctAnswerStyle}` : '',
+                }}
+                onClick={() => handleCardClick(id)}
+              >
+                <DefaultCard img={img} title={text} />
+              </Box>
             </Grid>
           ))}
         </Grid>
@@ -66,10 +56,7 @@ function VocabularyQuiz() {
             <Score value={counter.count} />
           </Grid>
           <Grid item>
-            <DefaultButton
-              click={handleAnswer}
-              buttonProps={{ disabled: userAnswerId.current === null }}
-            >
+            <DefaultButton click={handleAnswer} buttonProps={{ disabled: userAnswerId === null }}>
               Submit
             </DefaultButton>
           </Grid>

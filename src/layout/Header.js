@@ -7,13 +7,16 @@ function Header() {
     <AppBar position="static" sx={{ bgcolor: '#332a42' }}>
       <Container maxWidth="lg">
         <Toolbar disableGutters>
-          <Grid
-            container
-            alignItems="center"
-          >
-            <Box mr={1} mt={1}><SchoolIcon /></Box>
-            <Typography variant="h6" noWrap>English</Typography>
-            <Box ml={2}><Navbar /></Box>
+          <Grid container alignItems="center">
+            <Box mr={1} mt={1}>
+              <SchoolIcon />
+            </Box>
+            <Typography variant="h6" noWrap>
+              English
+            </Typography>
+            <Box ml={2}>
+              <Navbar />
+            </Box>
           </Grid>
         </Toolbar>
       </Container>

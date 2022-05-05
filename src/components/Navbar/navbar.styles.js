@@ -5,6 +5,5 @@ export const DefaultNavLink = styled(NavLink)(() => ({
   margin: '0 6px',
   padding: '8px 8px',
   color: '#e3e3e3',
-  textDecoration: "none",
+  textDecoration: 'none',
 }))
-

@@ -1,5 +1,5 @@
-import { useRef, useState } from "react"
-import { fetchDefinition } from "api/freeDictionary"
+import { useRef, useState } from 'react'
+import { fetchDefinition } from 'api/freeDictionary'
 
 const mainDefinition = 0
 
@@ -12,8 +12,7 @@ function useDictionary() {
     setLoading(true)
     const result = await fetchDefinition(word)
 
-    if (result.isError)
-      setError(result.error)
+    if (result.isError) setError(result.error)
     else {
       definitions.current = result.result
       setError(null)
@@ -22,24 +21,26 @@ function useDictionary() {
   }
 
   const getAudioUrl = () => {
-    return definitions.current !== null ?
-      definitions.current[mainDefinition]?.phonetics[mainDefinition]?.audio :
-      ''
+    return definitions.current !== null
+      ? definitions.current[mainDefinition]?.phonetics[mainDefinition]?.audio
+      : ''
   }
 
   const getPhonetics = () => {
-    return definitions.current !== null ?
-      definitions.current[mainDefinition]?.phonetics.find(item => item.text)?.text :
-      ''
+    return definitions.current !== null
+      ? definitions.current[mainDefinition]?.phonetics.find((item) => item.text)?.text
+      : ''
   }
 
   const getMeanings = (partOfSpeech) => {
     const result = []
 
     if (definitions.current !== null) {
-      const temp = definitions.current[mainDefinition]?.meanings.filter(meaning => meaning.partOfSpeech === partOfSpeech)
+      const temp = definitions.current[mainDefinition]?.meanings.filter(
+        (meaning) => meaning.partOfSpeech === partOfSpeech,
+      )
       if (temp?.length) {
-        temp.forEach(item => result.push(item.definitions))
+        temp.forEach((item) => result.push(item.definitions))
         return result.flat()
       }
     }
@@ -53,7 +54,7 @@ function useDictionary() {
     fetch,
     getMeanings,
     getAudioUrl,
-    getPhonetics
+    getPhonetics,
   }
 }
 

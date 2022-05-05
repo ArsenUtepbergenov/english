@@ -5,7 +5,7 @@ export const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#009688',
     color: 'white',
-  }
+  },
 }))
 
 export const StyledTableRow = styled(TableRow)(() => ({

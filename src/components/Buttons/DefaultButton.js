@@ -2,12 +2,7 @@ import Button from '@mui/material/Button'
 
 function DefaultButton({ click, buttonProps, children }) {
   return (
-    <Button
-      size="small"
-      variant="contained"
-      {...buttonProps}
-      onClick={click}
-    >
+    <Button size="small" variant="contained" {...buttonProps} onClick={click}>
       {children}
     </Button>
   )

@@ -7,10 +7,9 @@ export default function useClickOutside(ref, handler, attached = true) {
   useEffect(() => {
     if (!attached) return
 
-    const handleClick = e => {
+    const handleClick = (e) => {
       if (!ref.current) return
-      if (!ref.current.contains(e.target))
-        latestHandler.current()
+      if (!ref.current.contains(e.target)) latestHandler.current()
     }
 
     document.addEventListener('click', handleClick)

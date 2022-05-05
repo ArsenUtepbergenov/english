@@ -12,11 +12,7 @@ function TabPanel({ children, value, index, ...tabPanelProps }) {
       aria-labelledby={`tenses-tab-${index}`}
       {...tabPanelProps}
     >
-      {value === index && (
-        <Box sx={{ my: 3 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ my: 3 }}>{children}</Box>}
     </div>
   )
 }
@@ -35,18 +31,26 @@ export default function Tenses() {
     setValue(newValue)
   }
 
-  const subject = <><b>S</b> - Subject</>
-  const object = <><b>O</b> - Object</>
-  const verb = <><b>V</b> - Verb (V1 - present, V2 - past, V3 - past participle)</>
+  const subject = (
+    <>
+      <b>S</b> - Subject
+    </>
+  )
+  const object = (
+    <>
+      <b>O</b> - Object
+    </>
+  )
+  const verb = (
+    <>
+      <b>V</b> - Verb (V1 - present, V2 - past, V3 - past participle)
+    </>
+  )
 
   return (
     <section>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
-          value={value}
-          aria-label="tenses tabs"
-          onChange={handleChange}
-        >
+        <Tabs value={value} aria-label="tenses tabs" onChange={handleChange}>
           <Tab label="Active" {...a11yProps(0)} />
           <Tab label="Passive" {...a11yProps(1)} />
           <Tab label="Check yourself" {...a11yProps(2)} />
@@ -54,13 +58,21 @@ export default function Tenses() {
       </Box>
       <TabPanel value={value} index={0}>
         <DefaultTable headers={headers} rows={activeRows} />
-        <br/>
-        <legend>{subject}<br/>{verb}</legend>
+        <br />
+        <legend>
+          {subject}
+          <br />
+          {verb}
+        </legend>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <DefaultTable headers={headers} rows={passiveRows} />
-        <br/>
-        <legend>{object}<br/>{verb}</legend>
+        <br />
+        <legend>
+          {object}
+          <br />
+          {verb}
+        </legend>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Check yourself
