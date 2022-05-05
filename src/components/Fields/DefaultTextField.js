@@ -17,7 +17,7 @@ const DefaultTextField = forwardRef((props, ref) => {
       onChange={change}
       onKeyDown={keyDown}
       InputProps={{
-        endAdornment: endIconButton
+        endAdornment: endIconButton,
       }}
     />
   )
