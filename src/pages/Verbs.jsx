@@ -6,6 +6,7 @@ import Score from 'components/Score/Score'
 import useVerbForms from 'hooks/useVerbForms'
 import useCounter from 'hooks/useCounter'
 import useLatest from 'hooks/common/useLatest'
+import IrregularVerbs from 'components/Containers/IrregularVerbs'
 
 const Verbs = () => {
   const { infinitive, checkPastSimple, checkPastParticiple, nextVerb, check } = useVerbForms()
@@ -102,6 +103,9 @@ const Verbs = () => {
         <Typography noWrap color="text.secondary">
           Press <b>'Enter'</b> to next verb...
         </Typography>
+      </Box>
+      <Box mt={2}>
+        <IrregularVerbs />
       </Box>
     </section>
   )

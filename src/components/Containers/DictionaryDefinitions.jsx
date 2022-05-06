@@ -13,7 +13,15 @@ function DictionaryDefinitions({ partsOfSpeech, columns }) {
 
   const getItem = useCallback((definitions, partOfSpeech) => {
     return (
-      <Box sx={{ p: 1, maxHeight: 360, overflowY: 'auto', bgcolor: getBgColor(partOfSpeech) }}>
+      <Box
+        sx={{
+          p: 1,
+          maxHeight: 360,
+          overflowY: 'auto',
+          borderLeft: '7px dotted white',
+          bgcolor: getBgColor(partOfSpeech),
+        }}
+      >
         <Typography variant="h6" align="center">
           {capitalize(`${partOfSpeech}s`)}
         </Typography>

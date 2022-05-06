@@ -7,3 +7,8 @@ export const DefaultNavLink = styled(NavLink)(() => ({
   color: '#e3e3e3',
   textDecoration: 'none',
 }))
+
+export const activeStyle = {
+  background: '#1f1a28',
+  borderRadius: 8,
+}

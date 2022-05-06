@@ -1,12 +1,7 @@
-import { DefaultNavLink } from './navbar.styles'
+import { activeStyle, DefaultNavLink } from './navbar.styles'
 import { navLinks } from './navLinks'
 
 function Navbar() {
-  const activeStyle = {
-    background: '#1f1a28',
-    borderRadius: 8,
-  }
-
   return (
     <>
       {navLinks.map((item) => (

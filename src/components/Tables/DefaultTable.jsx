@@ -11,13 +11,13 @@ import {
 import { StyledTableRow, StyledTableCell } from './defaultTable.styles'
 import { v4 as uuidv4 } from 'uuid'
 
-export default function DefaultTable({ headerName = '', headers, rows }) {
+export default function DefaultTable({ headerName = '', headers, rows, defaultTableProps }) {
   const rowsLength = rows?.length
   const headersLength = headers?.length
 
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="default table">
+      <Table {...defaultTableProps} aria-label="default table">
         <TableHead>
           <TableRow>
             <StyledTableCell>{headerName}</StyledTableCell>
@@ -33,7 +33,7 @@ export default function DefaultTable({ headerName = '', headers, rows }) {
         <TableBody>
           {rowsLength
             ? rows.map((row) => (
-                <StyledTableRow key={row.name}>
+                <StyledTableRow key={uuidv4()}>
                   <TableCell component="th" scope="row">
                     <Typography variant="subtitle2" component="span">
                       {row.name}

@@ -2,9 +2,27 @@ import { useState, useRef } from 'react'
 import { COUNT_VERBS, VerbForms, irregularVerbs } from 'assets/data/verbs.js'
 
 const verbs = JSON.parse(irregularVerbs)
-const infinitiveVerbs = verbs[VerbForms.INFINITIVE]
-const pastSimpleVerbs = verbs[VerbForms.PAST_SIMPLE]
-const pastParticipleVerbs = verbs[VerbForms.PAST_PARTICIPLE]
+
+export const infinitiveVerbs = verbs[VerbForms.INFINITIVE]
+export const pastSimpleVerbs = verbs[VerbForms.PAST_SIMPLE]
+export const pastParticipleVerbs = verbs[VerbForms.PAST_PARTICIPLE]
+
+export function getVerbsAsUnions() {
+  let result = new Array(COUNT_VERBS).fill(null)
+
+  result = result.reduce((acc, _, i) => {
+    return [
+      ...acc,
+      {
+        Infinitive: infinitiveVerbs[i],
+        'Past Simple (V2)': pastSimpleVerbs[i],
+        'Past Participle (V3)': pastParticipleVerbs[i],
+      },
+    ]
+  }, [])
+
+  return result
+}
 
 function useVerbForms() {
   const [infinitive, setInfinitive] = useState('')
