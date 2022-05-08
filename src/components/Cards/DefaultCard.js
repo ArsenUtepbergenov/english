@@ -6,7 +6,7 @@ import { CardActionArea } from '@mui/material'
 
 export function DefaultCard({ img, title, text = '', click = () => {} }) {
   return (
-    <Card sx={{ maxWidth: 300, margin: 'auto' }} onClick={click}>
+    <Card square sx={{ maxWidth: 300, margin: 'auto' }} onClick={click}>
       <CardActionArea>
         <CardMedia component="img" height="220" image={img} alt={title} />
         <CardContent>

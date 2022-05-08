@@ -15,13 +15,13 @@ export const PartOfSpeech = {
 }
 
 export const DefinitionItemColor = {
-  [PartOfSpeech.NOUN]: '#689f38',
+  [PartOfSpeech.NOUN]: '#64913d',
   [PartOfSpeech.PRONOUN]: '#5d4037',
-  [PartOfSpeech.VERB]: '#0288d1',
-  [PartOfSpeech.ADJECTIVE]: '#ffa000',
+  [PartOfSpeech.VERB]: '#0f6b9d',
+  [PartOfSpeech.ADJECTIVE]: '#cf7e08',
   [PartOfSpeech.ADVERB]: '#616161',
   [PartOfSpeech.PREPOSITION]: '#455a64',
-  [PartOfSpeech.CONJUNCTION]: '#afb42b',
-  [PartOfSpeech.INTERJECTION]: '#00796b',
-  [PartOfSpeech.NUMERAL]: '#d32f2f',
+  [PartOfSpeech.CONJUNCTION]: '#939f1a',
+  [PartOfSpeech.INTERJECTION]: '#23645d',
+  [PartOfSpeech.NUMERAL]: '#c14646',
 }

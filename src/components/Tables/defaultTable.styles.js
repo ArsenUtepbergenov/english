@@ -12,7 +12,4 @@ export const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
     backgroundColor: '#ededed',
   },
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
 }))

@@ -1,6 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
-import CssBaseline from '@mui/material/CssBaseline'
-import Container from '@mui/material/Container'
+import { Box, CssBaseline, Container } from '@mui/material'
 import Verbs from 'pages/Verbs'
 import VocabularyQuiz from 'pages/VocabularyQuiz'
 import Dictionary from 'pages/Dictionary'
@@ -9,23 +8,20 @@ import Header from 'layout/Header'
 
 function App() {
   return (
-    <div>
+    <Box sx={{ height: '100vh' }}>
       <CssBaseline />
       <Header />
       <Container maxWidth="lg" sx={{ mt: '20px' }}>
         <Routes>
-          <Route
-            path="/"
-            element={<Navigate to="/forms-verb" replace />}
-          />
+          <Route path="/" element={<Navigate to="/forms-verb" replace />} />
           <Route path="/forms-verb" element={<Verbs />} />
           <Route path="/vocabulary-quiz" element={<VocabularyQuiz />} />
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/tenses" element={<Tenses />} />
         </Routes>
       </Container>
-    </div>
-  );
+    </Box>
+  )
 }
 
-export default App;
+export default App

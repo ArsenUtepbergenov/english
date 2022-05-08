@@ -22,7 +22,7 @@ function DictionaryDefinitions({ partsOfSpeech, columns }) {
           bgcolor: getBgColor(partOfSpeech),
         }}
       >
-        <Typography variant="h6" align="center">
+        <Typography variant="h6" align="center" sx={{ textDecoration: 'underline' }}>
           {capitalize(`${partOfSpeech}s`)}
         </Typography>
         <SimpleList items={definitions} prop="definition" />

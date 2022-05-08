@@ -5,7 +5,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   Typography,
 } from '@mui/material'
 import { StyledTableRow, StyledTableCell } from './defaultTable.styles'
@@ -16,7 +15,7 @@ export default function DefaultTable({ headerName = '', headers, rows, defaultTa
   const headersLength = headers?.length
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table {...defaultTableProps} aria-label="default table">
         <TableHead>
           <TableRow>

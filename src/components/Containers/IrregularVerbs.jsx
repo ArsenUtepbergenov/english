@@ -7,7 +7,7 @@ const rows = getVerbsAsUnions()
 
 export default function IrregularVerbs() {
   return (
-    <Accordion>
+    <Accordion square>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="all-verbs-content"
@@ -15,7 +15,7 @@ export default function IrregularVerbs() {
       >
         Show All
       </AccordionSummary>
-      <AccordionDetails>
+      <AccordionDetails sx={{ p: 0 }}>
         <DefaultTable
           headers={['Infinitive', 'Past Simple (V2)', 'Past Participle (V3)']}
           rows={rows}
