@@ -1,52 +1,40 @@
+import { useMemo } from 'react'
 import { Masonry } from '@mui/lab'
 import { Box, capitalize, Typography } from '@mui/material'
 import SimpleList from 'components/Lists/SimpleList'
 import { DefinitionItemColor } from 'models/dictionary'
-import { useMemo, useState, useCallback } from 'react'
 import { getPartsOfSpeechAsValues } from 'utils'
 
-function DictionaryDefinitions({ partsOfSpeech, columns }) {
-  const [parts] = useState(() => getPartsOfSpeechAsValues())
+const parts = getPartsOfSpeechAsValues()
 
-  const getBgColor = (partOfSpeech) => {
-    return DefinitionItemColor[partOfSpeech]
-  }
-
-  const getItem = useCallback((definitions, partOfSpeech) => {
-    return (
-      <Box
-        sx={{
-          p: 1,
-          maxHeight: 360,
-          overflowY: 'auto',
-          borderLeft: '7px dotted white',
-          bgcolor: getBgColor(partOfSpeech),
-        }}
-      >
-        <Typography variant="h6" align="center" sx={{ textDecoration: 'underline' }}>
-          {capitalize(`${partOfSpeech}s`)}
-        </Typography>
-        <SimpleList items={definitions} prop="definition" />
-      </Box>
-    )
-  }, [])
-
+export default function DictionaryDefinitions({ partsOfSpeech, columns }) {
   const getItems = useMemo(() => {
-    return parts?.length ? (
-      parts.map((part) => {
-        const definitions = partsOfSpeech[part]
-        return definitions?.length ? <span key={part}>{getItem(definitions, part)}</span> : null
-      })
-    ) : (
-      <></>
-    )
-  }, [parts, getItem, partsOfSpeech])
+    return parts.map((part) => {
+      const definitions = partsOfSpeech[part]
+
+      return definitions?.length ? (
+        <Box
+          key={part}
+          sx={{
+            p: 1,
+            maxHeight: 360,
+            overflowY: 'auto',
+            borderLeft: '7px dotted white',
+            bgcolor: DefinitionItemColor[part],
+          }}
+        >
+          <Typography variant="h6" align="center" sx={{ textDecoration: 'underline' }}>
+            {capitalize(`${part}s`)}
+          </Typography>
+          <SimpleList items={definitions} prop="definition" />
+        </Box>
+      ) : null
+    })
+  }, [partsOfSpeech])
 
   return (
     <Masonry columns={{ xs: 1, md: columns }} spacing={2} sx={{ color: 'white' }}>
-      {getItems}
+      {parts?.length ? <>{getItems}</> : null}
     </Masonry>
   )
 }
-
-export default DictionaryDefinitions

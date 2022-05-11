@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { activeStyle, DefaultNavLink } from './navbar.styles'
 import { navLinks } from './navLinks'
 
@@ -18,4 +19,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default memo(Navbar)
