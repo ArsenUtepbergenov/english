@@ -1,10 +1,13 @@
+// @ts-nocheck
 import { useState } from 'react'
+import { useSnackbar } from 'notistack'
 import { Box, Typography, Grid } from '@mui/material'
 import DefaultCard from 'components/Cards/DefaultCard'
 import Score from 'components/Score/Score'
 import DefaultButton from 'components/Buttons/DefaultButton'
 import useCounter from 'hooks/useCounter'
 import { getNextQuestion } from 'assets/img/quiz/quiz'
+import { getSuccessfulMessage } from 'utils'
 
 const correctAnswerStyle = '#9fcd69 solid 4px'
 const initialQuestion = getNextQuestion(0)
@@ -13,6 +16,11 @@ function VocabularyQuiz() {
   const counter = useCounter()
   const [question, setQuestion] = useState(initialQuestion)
   const [userAnswerId, setUserAnswerId] = useState(null)
+  const { enqueueSnackbar } = useSnackbar()
+
+  const showAnswerState = (text = '', variant = 'default') => {
+    enqueueSnackbar(text, { preventDuplicate: true, variant })
+  }
 
   const handleCardClick = (id) => {
     setUserAnswerId(id)
@@ -23,6 +31,9 @@ function VocabularyQuiz() {
       setQuestion(getNextQuestion())
       setUserAnswerId(null)
       counter.add(1)
+      showAnswerState(getSuccessfulMessage(), 'success')
+    } else {
+      showAnswerState('The answer is wrong!', 'error')
     }
   }
 

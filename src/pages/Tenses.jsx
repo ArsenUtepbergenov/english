@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Tabs, Tab, Box } from '@mui/material'
 import DefaultTable from 'components/Tables/DefaultTable'
-import { headers, activeRows, passiveRows } from 'models/tenses'
+import { headers, activeRows, passiveRows } from 'assets/data/tenses'
 
 function TabPanel({ children, value, index, ...tabPanelProps }) {
   return (

@@ -1,7 +1,3 @@
-export function getPartsOfSpeechAsValues() {
-  return Object.values(PartOfSpeech)
-}
-
 export const PartOfSpeech = {
   NOUN: 'noun',
   PRONOUN: 'pronoun',

@@ -1,8 +1,9 @@
 import { Masonry } from '@mui/lab'
 import { Box, capitalize, Typography } from '@mui/material'
 import SimpleList from 'components/Lists/SimpleList'
-import { DefinitionItemColor, getPartsOfSpeechAsValues } from 'models/dictionary'
+import { DefinitionItemColor } from 'models/dictionary'
 import { useMemo, useState, useCallback } from 'react'
+import { getPartsOfSpeechAsValues } from 'utils'
 
 function DictionaryDefinitions({ partsOfSpeech, columns }) {
   const [parts] = useState(() => getPartsOfSpeechAsValues())

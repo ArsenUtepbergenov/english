@@ -14,7 +14,7 @@ function Header() {
             <Typography variant="h6" noWrap>
               English
             </Typography>
-            <Box ml={2}>
+            <Box ml={4}>
               <Navbar />
             </Box>
           </Grid>

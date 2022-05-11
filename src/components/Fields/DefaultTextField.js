@@ -2,7 +2,7 @@ import { forwardRef } from 'react'
 import { TextField } from '@mui/material'
 
 const DefaultTextField = forwardRef((props, ref) => {
-  const { label, inputProps, value, change, keyDown, endIconButton = null } = props
+  const { label, inputProps = {}, value, change, keyDown, endIconButton = null } = props
 
   return (
     <TextField

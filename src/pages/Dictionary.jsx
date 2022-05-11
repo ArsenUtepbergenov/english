@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRef, useState, useMemo } from 'react'
 import { InputAdornment, IconButton, Box, Grid, Typography, CircularProgress } from '@mui/material'
 import { SearchOutlined } from '@mui/icons-material'
@@ -5,12 +6,12 @@ import DefaultTextField from 'components/Fields/DefaultTextField'
 import DictionaryDefinitions from 'components/Containers/DictionaryDefinitions'
 import DefaultAudioPlayer from 'components/Media/DefaultAudioPlayer'
 import useDictionary from 'hooks/useDictionary'
-import { getPartsOfSpeechAsValues } from 'models/dictionary'
 import { KeyCode } from 'models/common'
+import { getPartsOfSpeechAsValues } from 'utils'
 
 function Dictionary() {
   const { error, loading, fetch, getMeanings, getAudioUrl, getPhonetics } = useDictionary()
-  const inputRef = useRef()
+  const inputRef = useRef(null)
   const columns = useRef(0)
   const [prevWord, setPrevWord] = useState('')
   const [definitions, setDefinitions] = useState(new Map())

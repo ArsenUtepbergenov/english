@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import DefaultTable from 'components/Tables/DefaultTable'
@@ -5,9 +6,14 @@ import { getVerbsAsUnions } from 'hooks/useVerbForms'
 
 const rows = getVerbsAsUnions()
 
-export default function IrregularVerbs() {
+export default memo(function IrregularVerbs() {
   return (
-    <Accordion square>
+    <Accordion
+      square
+      TransitionProps={{
+        timeout: 0,
+      }}
+    >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="all-verbs-content"
@@ -26,4 +32,4 @@ export default function IrregularVerbs() {
       </AccordionDetails>
     </Accordion>
   )
-}
+})

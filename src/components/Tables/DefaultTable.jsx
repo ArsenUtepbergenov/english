@@ -10,7 +10,7 @@ import {
 import { StyledTableRow, StyledTableCell } from './defaultTable.styles'
 import { v4 as uuidv4 } from 'uuid'
 
-export default function DefaultTable({ headerName = '', headers, rows, defaultTableProps }) {
+export default function DefaultTable({ headerName = '', headers, rows, defaultTableProps = {} }) {
   const rowsLength = rows?.length
   const headersLength = headers?.length
 

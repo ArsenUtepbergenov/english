@@ -1,15 +1,23 @@
-import { useEffect, useRef, useLayoutEffect } from 'react'
+// @ts-nocheck
+import { useEffect, useRef, useLayoutEffect, useState } from 'react'
 import { Box, Grid, Typography } from '@mui/material'
 import DefaultTextField from 'components/Fields/DefaultTextField'
 import DefaultButton from 'components/Buttons/DefaultButton'
-import Score from 'components/Score/Score'
 import useVerbForms from 'hooks/useVerbForms'
 import useCounter from 'hooks/useCounter'
 import useLatest from 'hooks/common/useLatest'
 import IrregularVerbs from 'components/Containers/IrregularVerbs'
+import AnsweredVerbs from 'components/Containers/AnsweredVerbs'
 
 const Verbs = () => {
   const { infinitive, checkPastSimple, checkPastParticiple, nextVerb, check } = useVerbForms()
+  const [answeredVerbs, setAnsweredVerbs] = useState(() => [
+    {
+      Infinitive: '-',
+      'Past Simple (V2)': '-',
+      'Past Participle (V3)': '-',
+    },
+  ])
   const counter = useCounter()
   const pastSimple = useRef(null)
   const pastParticiple = useRef(null)
@@ -30,7 +38,20 @@ const Verbs = () => {
   }
 
   const handleNextVerb = () => {
-    if (check(pastSimple.current.value, pastParticiple.current.value)) counter.add(1)
+    if (check(pastSimple.current.value, pastParticiple.current.value)) {
+      if (counter.count <= 0)
+        setAnsweredVerbs((prev) => {
+          prev = []
+          return prev
+        })
+      const answer = {
+        Infinitive: infinitive,
+        'Past Simple (V2)': pastSimple.current.value,
+        'Past Participle (V3)': pastParticiple.current.value,
+      }
+      setAnsweredVerbs((prev) => [...prev, ...[answer]])
+      counter.add(1)
+    }
     nextVerb()
     reset()
   }
@@ -56,7 +77,7 @@ const Verbs = () => {
   return (
     <section>
       <Grid container justifyContent="center" spacing={2}>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <DefaultTextField
             inputProps={{
               type: 'text',
@@ -66,7 +87,7 @@ const Verbs = () => {
             value={infinitive}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <DefaultTextField
             ref={pastSimple}
             inputProps={{
@@ -77,13 +98,13 @@ const Verbs = () => {
             change={handlePastSimpleChange}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <DefaultTextField
             ref={pastParticiple}
             inputProps={{
               type: 'text',
               placeholder: 'Past Participle...',
-              disabled: !infinitive ? true : false,
+              disabled: !infinitive,
             }}
             change={handlePastParticipleChange}
           />
@@ -95,17 +116,21 @@ const Verbs = () => {
             <DefaultButton click={() => latestHandler.current()}>New Verb</DefaultButton>
           </Grid>
           <Grid item>
-            <Score value={counter.count} />
+            <Typography noWrap color="text.secondary">
+              Press <b>'Enter'</b> to next...
+            </Typography>
           </Grid>
         </Grid>
       </Box>
       <Box mt={2}>
-        <Typography noWrap color="text.secondary">
-          Press <b>'Enter'</b> to next verb...
-        </Typography>
-      </Box>
-      <Box mt={2}>
-        <IrregularVerbs />
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <AnsweredVerbs rows={answeredVerbs} score={counter.count} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <IrregularVerbs />
+          </Grid>
+        </Grid>
       </Box>
     </section>
   )
