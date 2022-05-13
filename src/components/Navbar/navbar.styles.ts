@@ -8,6 +8,12 @@ export const DefaultNavLink = styled(NavLink)(() => ({
   textDecoration: 'none',
 }))
 
+export const TextNavLink = styled(NavLink)(() => ({
+  textDecoration: 'none',
+  color: '#332a42',
+  fontWeight: '500',
+}))
+
 export const activeStyle = {
   background: '#1f1a28',
   borderRadius: 8,

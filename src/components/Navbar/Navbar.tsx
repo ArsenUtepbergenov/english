@@ -5,14 +5,14 @@ import { navLinks } from './navLinks'
 function Navbar() {
   return (
     <>
-      {navLinks.map((item) => (
+      {navLinks.map((link) => (
         <DefaultNavLink
-          key={item.name}
-          to={item.to}
+          key={link.name}
+          to={link.to}
           aria-current="page"
           style={({ isActive }) => (isActive ? activeStyle : {})}
         >
-          {item.name}
+          {link.name}
         </DefaultNavLink>
       ))}
     </>
