@@ -1,4 +1,32 @@
 export const headers = ['Past', 'Present', 'Future']
+export const conditionalHeaders = ['If/When - clause', 'Main clause', 'Usage']
+
+export const conditionalRows = [
+  {
+    name: 'Zero',
+    'If/When - clause': 'If + present simple',
+    'Main clause': 'Present simple',
+    Usage: 'Real condition + inevitable result',
+  },
+  {
+    name: 'First',
+    'If/When - clause': 'If + present simple',
+    'Main clause': 'Will/Can/Must + verb (inf.), Imperative form',
+    Usage: 'Possible condition + probable result',
+  },
+  {
+    name: 'Second',
+    'If/When - clause': 'If + past simple',
+    'Main clause': 'Would/Could + verb (inf.)',
+    Usage: 'Hypothetical condition + possible result',
+  },
+  {
+    name: 'Third',
+    'If/When - clause': 'If + past perfect',
+    'Main clause': 'Would have/Could have + past participle',
+    Usage: 'Expired past condition + possible past result',
+  },
+]
 
 export const activeRows = [
   {
