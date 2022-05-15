@@ -1,5 +1,5 @@
 export type DefaultAudioPlayerProps = {
-  word: string
-  phonetics: string
-  audioUrl: string
+  word?: string
+  phonetics?: string
+  audioUrl?: string
 }

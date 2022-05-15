@@ -5,7 +5,11 @@ import { DefaultAudioPlayerProps } from './media.types'
 
 const audio = new Audio()
 
-const DefaultAudioPlayer: FC<DefaultAudioPlayerProps> = ({ word, phonetics, audioUrl }) => {
+const DefaultAudioPlayer: FC<DefaultAudioPlayerProps> = ({
+  word = '',
+  phonetics = '',
+  audioUrl = '',
+}) => {
   const play = () => {
     audio.src = audioUrl
     audio.play()
