@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Typography } from '@mui/material'
-import { ScoreProps } from './score.types'
+import { ScoreProps } from './texts.types'
 
 const Score: FC<ScoreProps> = ({ value }) => {
   return (

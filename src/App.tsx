@@ -4,7 +4,9 @@ import Verbs from 'pages/Verbs'
 import VocabularyQuiz from 'pages/VocabularyQuiz'
 import Dictionary from 'pages/Dictionary'
 import Tenses from 'pages/Tenses'
+import Login from 'pages/Login'
 import Header from 'layout/Header'
+import Register from 'pages/Register'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/vocabulary-quiz" element={<VocabularyQuiz />} />
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/tenses" element={<Tenses />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Container>
     </Box>
