@@ -1,7 +1,13 @@
 import { useState } from 'react'
 import { Tabs, Tab, Box } from '@mui/material'
 import DefaultTable from 'components/Tables/DefaultTable'
-import { headers, activeRows, passiveRows } from 'assets/data/tenses'
+import {
+  headers,
+  activeRows,
+  passiveRows,
+  conditionalHeaders,
+  conditionalRows,
+} from 'assets/data/tenses'
 
 function TabPanel({
   children,
@@ -62,7 +68,8 @@ export default function Tenses() {
         <Tabs value={value} aria-label="tenses tabs" onChange={handleChange}>
           <Tab label="Active" {...a11yProps(0)} />
           <Tab label="Passive" {...a11yProps(1)} />
-          <Tab label="Check yourself" {...a11yProps(2)} />
+          <Tab label="Conditionals" {...a11yProps(2)} />
+          <Tab label="Check yourself" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -84,6 +91,13 @@ export default function Tenses() {
         </legend>
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <DefaultTable
+          headerName="Conditional"
+          headers={conditionalHeaders}
+          rows={conditionalRows}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         Check yourself
       </TabPanel>
     </section>

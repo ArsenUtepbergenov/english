@@ -1,18 +1,19 @@
 import { useRef, useState } from 'react'
 import { fetchDefinition } from 'api/freeDictionary'
+import { Definitions, InternalDefinition } from 'models/dictionary'
 
 const mainDefinition = 0
 
 function useDictionary() {
-  const definitions = useRef<any | null>(null)
-  const [error, setError] = useState<string | null | undefined>(null)
+  const definitions = useRef<Definitions | null>(null)
+  const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
   const fetch = async (word: string) => {
     setLoading(true)
     const result = await fetchDefinition(word)
 
-    if (result?.isError) setError(result.error)
+    if (result?.isError) setError(result.error!)
     else {
       definitions.current = result?.result
       setError(null)
@@ -21,28 +22,23 @@ function useDictionary() {
   }
 
   const getAudioUrl = () => {
-    return definitions.current !== null
-      ? definitions.current[mainDefinition]?.phonetics[mainDefinition]?.audio
-      : ''
+    if (definitions.current === null) return ''
+    return definitions.current[mainDefinition].phonetics.find((item) => item.audio)?.audio
   }
 
   const getPhonetics = () => {
-    return definitions.current !== null
-      ? definitions.current[mainDefinition]?.phonetics.find((item: any) => item.text)?.text
-      : ''
+    if (definitions.current === null) return ''
+    return definitions.current[mainDefinition].phonetics.find((item) => item.text)?.text
   }
 
   const getMeanings = (partOfSpeech: string) => {
-    const result: any[] = []
+    const result: InternalDefinition[] = []
 
     if (definitions.current !== null) {
-      const temp = definitions.current[mainDefinition]?.meanings.filter(
-        (meaning: any) => meaning.partOfSpeech === partOfSpeech,
+      const temp = definitions.current[mainDefinition].meanings.filter(
+        (meaning) => meaning.partOfSpeech === partOfSpeech,
       )
-      if (temp?.length) {
-        temp.forEach((item: any) => result.push(item.definitions))
-        return result.flat()
-      }
+      if (temp?.length) temp.forEach((item) => result.push(...item.definitions))
     }
 
     return result

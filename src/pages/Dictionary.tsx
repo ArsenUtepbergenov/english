@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo } from 'react'
+import { useRef, useState, useMemo, KeyboardEvent } from 'react'
 import { InputAdornment, IconButton, Box, Grid, Typography, CircularProgress } from '@mui/material'
 import { SearchOutlined } from '@mui/icons-material'
 import DefaultTextField from 'components/Fields/DefaultTextField'
@@ -13,24 +13,24 @@ function Dictionary() {
   const inputRef = useRef<any>(null)
   const columns = useRef(0)
   const [prevWord, setPrevWord] = useState('')
-  const [definitions, setDefinitions] = useState(new Map())
+  const [definitions, setDefinitions] = useState(() => new Map())
 
   const handleSearch = async () => {
     const word = inputRef.current.value
 
-    if (word === prevWord) return
-    else if (word !== '') {
+    if (word === prevWord || word === '') return
+    else {
       await fetch(word)
 
       for (const partOfSpeech of getPartsOfSpeechAsValues())
         setDefinitions(new Map(definitions.set(partOfSpeech, getMeanings(partOfSpeech))))
 
       setPrevWord(word)
-    } else return
+    }
   }
 
-  const handleKeyPress = (e: any) => {
-    if (e.keyCode === KeyCode.ENTER) {
+  const handleKeyPress = (e: KeyboardEvent) => {
+    if (e.code === KeyCode.ENTER) {
       e.preventDefault()
       e.stopPropagation()
       handleSearch()

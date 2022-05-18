@@ -21,3 +21,26 @@ export const DefinitionItemColor = {
   [PartOfSpeech.INTERJECTION]: '#23645d',
   [PartOfSpeech.NUMERAL]: '#c14646',
 }
+
+export type InternalDefinition = {
+  definition: string
+}
+
+type Meaning = {
+  partOfSpeech: string
+  definitions: InternalDefinition[]
+}
+
+type Phonetic = {
+  audio: string
+  text: string
+}
+
+type Definition = {
+  phonetics: Phonetic[]
+  meanings: Meaning[]
+}
+
+export type Definitions = {
+  [i: number]: Definition
+}

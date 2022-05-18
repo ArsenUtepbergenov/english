@@ -5,6 +5,7 @@ import { store } from 'store'
 import { Provider } from 'react-redux'
 import { SnackbarProvider } from 'notistack'
 import App from 'App'
+import './firebase/firebase.js'
 
 const rootNode = document.getElementById('root')
 const root = ReactDOM.createRoot(rootNode as Element)
