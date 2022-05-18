@@ -44,7 +44,7 @@ export default function LoginForm({ login }: LoginFormProps) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Login
+          Sign In
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -79,7 +79,7 @@ export default function LoginForm({ login }: LoginFormProps) {
               <Link to="/register">Forgot password?</Link>
             </Grid>
             <Grid item>
-              <Link to="/register">{"Don't have an account? Register"}</Link>
+              <Link to="/register">{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
         </Box>

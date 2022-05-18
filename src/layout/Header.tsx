@@ -10,25 +10,28 @@ import {
   MenuItem,
   IconButton,
   Avatar,
+  CircularProgress,
+  Tooltip,
+  ListItemIcon,
+  ListItemText,
+  capitalize,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import SchoolIcon from '@mui/icons-material/School'
+import LoginIcon from '@mui/icons-material/Login'
 import Navbar from 'components/Navbar/Navbar'
 import { navLinks } from 'components/Navbar/navLinks'
 import { DefaultNavLink } from 'components/Navbar/navbar.styles'
-import { useAuth } from 'hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { getAuth, signOut } from 'firebase/auth'
-import { removeUser } from 'store/user/userSlice'
-import { useDispatch } from 'react-redux'
+import { useAppSelector } from 'hooks/redux/redux'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 
 const settings = ['Logout']
 
-function Header() {
-  const { isAuth } = useAuth()
+function Header({ isAuthLoading }: { isAuthLoading?: boolean }) {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-
+  const { email, isLogged } = useAppSelector(state => state.user)
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
@@ -52,15 +55,11 @@ function Header() {
     handleCloseNavMenu()
   }
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
       const auth = getAuth()
 
-      await signOut(auth)
-
-      dispatch(removeUser())
-
-      navigate('/login', { replace: true })
+      signOut(auth)
 
       handleCloseUserMenu()
     } catch (error) {
@@ -71,7 +70,7 @@ function Header() {
   const userMenu = (
     <>
       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-        <Avatar alt="Arsen" src="" />
+        <Avatar sx={{ bgcolor: '#fff', color: '#332a42' }} alt={capitalize(`${email}`)} src="/" />
       </IconButton>
       <Menu
         sx={{ mt: '45px' }}
@@ -91,7 +90,10 @@ function Header() {
       >
         {settings.map(setting => (
           <MenuItem key={setting} onClick={handleLogout}>
-            {setting}
+            <ListItemIcon>
+              <ExitToAppIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>{setting}</ListItemText>
           </MenuItem>
         ))}
       </Menu>
@@ -143,7 +145,7 @@ function Header() {
       >
         {navLinks.map(link => (
           <MenuItem key={link.name} onClick={() => handleTo(link.to)}>
-            {link.name}
+            <ListItemText>{link.name}</ListItemText>
           </MenuItem>
         ))}
       </Menu>
@@ -162,13 +164,28 @@ function Header() {
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: 'none', md: 'flex', flexGrow: 1 } }}>{desktopView}</Box>
           <Box sx={{ display: { xs: 'flex', md: 'none', flexGrow: 1 } }}>{mobileView}</Box>
-          {!isAuth ? (
-            <DefaultNavLink key="login-link" to="/login" aria-current="page">
-              Login
-            </DefaultNavLink>
-          ) : (
-            <Box sx={{ flexGrow: 0 }}>{userMenu}</Box>
-          )}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {isAuthLoading ? (
+              <CircularProgress />
+            ) : (
+              <>
+                {!isLogged ? (
+                  <Tooltip title="Sign In">
+                    <DefaultNavLink
+                      key="login-link"
+                      to="login"
+                      aria-current="page"
+                      sx={{ display: 'flex' }}
+                    >
+                      <LoginIcon />
+                    </DefaultNavLink>
+                  </Tooltip>
+                ) : (
+                  <>{userMenu}</>
+                )}
+              </>
+            )}
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

@@ -7,17 +7,18 @@ import Tenses from 'pages/Tenses'
 import Login from 'pages/Login'
 import Header from 'layout/Header'
 import Register from 'pages/Register'
-import useLocalStorage from 'hooks/useLocalStorage'
+import { useAuth } from 'hooks/useAuth'
+import { useAppSelector } from 'hooks/redux/redux'
 
 function App() {
-  const [token] = useLocalStorage('token', '')
+  useAuth()
 
-  console.log(token)
+  const isAuthLoading = useAppSelector(state => state.user.isLoading)
 
   return (
     <Box sx={{ height: '100vh' }}>
       <CssBaseline />
-      <Header />
+      <Header isAuthLoading={isAuthLoading} />
       <Container maxWidth="lg" sx={{ mt: '20px' }}>
         <Routes>
           <Route path="/" element={<Navigate to="/forms-verb" replace />} />
