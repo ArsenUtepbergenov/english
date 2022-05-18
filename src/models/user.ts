@@ -3,3 +3,9 @@ export type User = {
   email: string | null
   token: string
 }
+
+export type UserData = {
+  name?: string
+  userEmail: string
+  userPassword: string
+}
