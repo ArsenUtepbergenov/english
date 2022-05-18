@@ -7,8 +7,13 @@ import Tenses from 'pages/Tenses'
 import Login from 'pages/Login'
 import Header from 'layout/Header'
 import Register from 'pages/Register'
+import useLocalStorage from 'hooks/useLocalStorage'
 
 function App() {
+  const [token] = useLocalStorage('token', '')
+
+  console.log(token)
+
   return (
     <Box sx={{ height: '100vh' }}>
       <CssBaseline />
