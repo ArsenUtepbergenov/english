@@ -44,20 +44,21 @@ function useVerbForms() {
     setStyles(pastSimpleVerb.current, target)
   }
 
-  const checkPastParticiple = (target: any) => {
+  const checkPastParticiple = (target: HTMLInputElement) => {
     setStyles(pastParticipleVerb.current, target)
   }
 
-  const setStyles = (value: string, target: any) => {
+  const setStyles = (value: string, target: HTMLInputElement) => {
     const tValue = parse(target)
     if (!tValue) {
-      target.style = ''
+      target.style.cssText = ''
       return
-    } else if (value !== tValue) target.style = 'background: #ffb0aa; border-color: #f97e7e;'
-    else target.style = 'background: #a7e45f; border-color: green;'
+    } else if (value !== tValue)
+      target.style.cssText = 'background: #ffb0aa; border-color: #f97e7e;'
+    else target.style.cssText = 'background: #a7e45f; border-color: green;'
   }
 
-  const check = (pastSimple: any, pastParticiple: any) => {
+  const check = (pastSimple: string, pastParticiple: string) => {
     return (
       infinitive &&
       pastSimpleVerb.current === pastSimple &&

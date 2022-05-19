@@ -1,4 +1,17 @@
-export const questions: any[] = [
+export type Answer = {
+  id: number
+  img?: string
+  text: string
+}
+
+type Question = {
+  id: number
+  word: string
+  correctId: number
+  answers: Answer[]
+}
+
+export const questions: Question[] = [
   {
     id: 1,
     word: 'Гора',
@@ -47,7 +60,7 @@ export const questions: any[] = [
 
 function getQuestion() {
   let i = 0
-  return function (initial?: any) {
+  return function (initial?: number) {
     if (initial === 0 || i >= questions.length - 1) i = 0
     else i++
     return questions[i]

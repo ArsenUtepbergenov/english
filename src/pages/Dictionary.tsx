@@ -64,9 +64,10 @@ function Dictionary() {
       <Grid container direction="column" alignContent="center" spacing={2}>
         <Grid item>
           <DefaultTextField
+            focus
             ref={inputRef}
             inputProps={{ type: 'text', placeholder: 'Word...' }}
-            keyDown={(e) => handleKeyPress(e)}
+            keyDown={e => handleKeyPress(e)}
             endIconButton={
               <InputAdornment position="end">
                 <IconButton aria-label="search" onClick={handleSearch} edge="end">

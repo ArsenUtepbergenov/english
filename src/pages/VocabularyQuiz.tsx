@@ -5,7 +5,7 @@ import DefaultCard from 'components/Cards/DefaultCard'
 import Score from 'components/Texts/Score'
 import DefaultButton from 'components/Buttons/DefaultButton'
 import useCounter from 'hooks/useCounter'
-import { getNextQuestion } from 'assets/img/quiz/quiz'
+import { Answer, getNextQuestion } from 'assets/img/quiz/quiz'
 import { getSuccessfulMessage } from 'utils'
 
 const correctAnswerStyle = '#9fcd69 solid 4px'
@@ -45,7 +45,7 @@ function VocabularyQuiz() {
           </Typography>
         </Box>
         <Grid container spacing={3}>
-          {question?.answers?.map(({ id, img, text }: any) => (
+          {question?.answers?.map(({ id, img, text }: Answer) => (
             <Grid key={text} item xs={12} md={4}>
               <Box
                 sx={{ minWidth: '300px', width: 'max-content', margin: 'auto' }}

@@ -32,12 +32,12 @@ function Verbs() {
   const reset = () => {
     pastSimple.current.value = ''
     pastParticiple.current.value = ''
-    pastSimple.current.style = ''
-    pastParticiple.current.style = ''
+    pastSimple.current.style.cssText = ''
+    pastParticiple.current.style.cssText = ''
   }
 
   const handleNextVerb = () => {
-    if (check(pastSimple.current.value, pastParticiple.current.value)) {
+    if (check(pastSimple.current.value as string, pastParticiple.current.value as string)) {
       if (counter.count <= 0)
         setAnsweredVerbs(prev => {
           prev = []

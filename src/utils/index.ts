@@ -1,6 +1,6 @@
 import { PartOfSpeech } from 'models/dictionary'
 
-export function classNames(...classes: any[]) {
+export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
