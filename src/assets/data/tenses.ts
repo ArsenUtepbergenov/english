@@ -1,7 +1,7 @@
 export const headers = ['Past', 'Present', 'Future']
 export const conditionalHeaders = ['If/When - clause', 'Main clause', 'Usage']
 
-export const conditionalRows = [
+export const conditionalRows: Record<string, string>[] = [
   {
     name: 'Zero',
     'If/When - clause': 'If + present simple',
@@ -28,7 +28,7 @@ export const conditionalRows = [
   },
 ]
 
-export const activeRows = [
+export const activeRows: Record<string, string>[] = [
   {
     name: 'Simple',
     Past: 'S + V2',
@@ -55,7 +55,7 @@ export const activeRows = [
   },
 ]
 
-export const passiveRows = [
+export const passiveRows: Record<string, string>[] = [
   {
     name: 'Simple',
     Past: 'O + was/were + V3',

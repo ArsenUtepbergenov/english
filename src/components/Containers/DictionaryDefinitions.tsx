@@ -13,7 +13,7 @@ export default function DictionaryDefinitions({
   columns,
 }: DictionaryDefinitionsProps) {
   const getItems = useMemo(() => {
-    return parts.map((part) => {
+    return parts.map(part => {
       const definitions = partsOfSpeech[part]
 
       return definitions?.length ? (

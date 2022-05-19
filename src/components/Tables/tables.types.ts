@@ -1,6 +1,8 @@
+import { TableProps } from '@mui/material'
+
 export type DefaultTableProps = {
   headerName?: string
   headers: string[]
-  rows: any[]
-  defaultTableProps?: object
+  rows: Record<string, string>[]
+  defaultTableProps?: TableProps
 }

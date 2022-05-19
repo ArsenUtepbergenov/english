@@ -18,8 +18,8 @@ function Verbs() {
     },
   ])
   const counter = useCounter()
-  const pastSimple = useRef<any>(null)
-  const pastParticiple = useRef<any>(null)
+  const pastSimple = useRef<HTMLInputElement | null>(null)
+  const pastParticiple = useRef<HTMLInputElement | null>(null)
 
   const handlePastSimpleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     checkPastSimple(e.target)
@@ -30,23 +30,30 @@ function Verbs() {
   }
 
   const reset = () => {
-    pastSimple.current.value = ''
-    pastParticiple.current.value = ''
-    pastSimple.current.style.cssText = ''
-    pastParticiple.current.style.cssText = ''
+    if (pastSimple.current && pastParticiple.current) {
+      pastSimple.current.value = ''
+      pastParticiple.current.value = ''
+      pastSimple.current.style.cssText = ''
+      pastParticiple.current.style.cssText = ''
+    }
   }
 
   const handleNextVerb = () => {
-    if (check(pastSimple.current.value as string, pastParticiple.current.value as string)) {
-      if (counter.count <= 0)
+    const newV2 = pastSimple.current?.value as string
+    const newV3 = pastParticiple.current?.value as string
+
+    if (check(newV2, newV3)) {
+      if (counter.count <= 0) {
         setAnsweredVerbs(prev => {
           prev = []
           return prev
         })
+      }
+
       const answer = {
         Infinitive: infinitive,
-        'Past Simple (V2)': pastSimple.current.value,
-        'Past Participle (V3)': pastParticiple.current.value,
+        'Past Simple (V2)': newV2,
+        'Past Participle (V3)': newV3,
       }
       setAnsweredVerbs(prev => [...prev, ...[answer]])
       counter.add(1)
@@ -56,7 +63,7 @@ function Verbs() {
   }
 
   useLayoutEffect(() => {
-    pastSimple.current.focus()
+    pastSimple.current?.focus()
   })
 
   const latestHandler = useLatest(handleNextVerb)

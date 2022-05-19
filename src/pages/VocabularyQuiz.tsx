@@ -66,7 +66,10 @@ function VocabularyQuiz() {
             <Score value={counter.count} />
           </Grid>
           <Grid item>
-            <DefaultButton click={handleAnswer} buttonProps={{ disabled: userAnswerId === null }}>
+            <DefaultButton
+              click={handleAnswer}
+              buttonProps={{ size: 'medium', disabled: userAnswerId === null }}
+            >
               Submit
             </DefaultButton>
           </Grid>

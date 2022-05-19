@@ -4,5 +4,5 @@ export type DictionaryDefinitionsProps = {
 }
 
 export type AnsweredVerbsProps = {
-  rows: any[]
+  rows: Record<string, string>[]
 }

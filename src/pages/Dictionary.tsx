@@ -10,13 +10,13 @@ import { getPartsOfSpeechAsValues } from 'utils'
 
 function Dictionary() {
   const { error, loading, fetch, getMeanings, getAudioUrl, getPhonetics } = useDictionary()
-  const inputRef = useRef<any>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
   const columns = useRef(0)
   const [prevWord, setPrevWord] = useState('')
   const [definitions, setDefinitions] = useState(() => new Map())
 
   const handleSearch = async () => {
-    const word = inputRef.current.value
+    const word = inputRef.current?.value as string
 
     if (word === prevWord || word === '') return
     else {

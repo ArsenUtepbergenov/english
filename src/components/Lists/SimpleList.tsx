@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { SimpleListProps } from './lists.types'
 
 const SimpleList: FC<SimpleListProps> = ({ items, prop = '' }) => {
@@ -9,4 +9,4 @@ const SimpleList: FC<SimpleListProps> = ({ items, prop = '' }) => {
   )
 }
 
-export default SimpleList
+export default memo(SimpleList)
