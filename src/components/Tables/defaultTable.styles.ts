@@ -3,13 +3,14 @@ import { TableCell, TableRow, tableCellClasses } from '@mui/material'
 
 export const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#009688',
+    backgroundColor: '#74a53c',
     color: 'white',
+    fontSize: 16,
   },
 }))
 
 export const StyledTableRow = styled(TableRow)(() => ({
-  '&:nth-of-type(even)': {
+  '&:nth-of-type(odd)': {
     backgroundColor: '#ededed',
   },
 }))

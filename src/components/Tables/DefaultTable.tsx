@@ -28,7 +28,7 @@ const DefaultTable: FC<DefaultTableProps> = ({
           <TableRow>
             <StyledTableCell>{headerName}</StyledTableCell>
             {headersLength
-              ? headers.map((header) => (
+              ? headers.map(header => (
                   <StyledTableCell key={header} align="center">
                     {header}
                   </StyledTableCell>
@@ -38,7 +38,7 @@ const DefaultTable: FC<DefaultTableProps> = ({
         </TableHead>
         <TableBody>
           {rowsLength
-            ? rows.map((row) => (
+            ? rows.map(row => (
                 <StyledTableRow key={uuidv4()}>
                   <TableCell component="th" scope="row">
                     <Typography variant="subtitle2" component="span">

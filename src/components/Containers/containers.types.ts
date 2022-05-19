@@ -5,5 +5,4 @@ export type DictionaryDefinitionsProps = {
 
 export type AnsweredVerbsProps = {
   rows: any[]
-  score: number | string
 }

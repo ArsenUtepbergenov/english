@@ -1,8 +1,9 @@
 import { memo } from 'react'
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import DefaultTable from 'components/Tables/DefaultTable'
 import { getVerbsAsUnions } from 'hooks/useVerbForms'
+import { Accordion, AccordionSummary } from './containers.styles'
+import { AccordionDetails } from '@mui/material'
 
 const rows = getVerbsAsUnions()
 

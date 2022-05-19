@@ -1,6 +1,6 @@
 export type DefaultTableProps = {
   headerName?: string
-  headers: any[]
+  headers: string[]
   rows: any[]
   defaultTableProps?: object
 }
