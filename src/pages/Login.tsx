@@ -1,23 +1,27 @@
-import { useNavigate } from 'react-router-dom'
+import LoginForm from 'components/Forms/LoginForm'
 import {
   browserLocalPersistence,
+  inMemoryPersistence,
   getAuth,
   setPersistence,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
-import LoginForm from 'components/Forms/LoginForm'
 import { UserData } from 'models/user'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const navigate = useNavigate()
 
   const login = async (userData: UserData) => {
-    const { userEmail, userPassword } = userData
-    const auth = getAuth()
-
     try {
-      await setPersistence(auth, browserLocalPersistence)
+      const auth = getAuth()
+      const { userEmail, userPassword, rememberMe } = userData
+
+      const persistence = rememberMe ? browserLocalPersistence : inMemoryPersistence
+      await setPersistence(auth, persistence)
+
       await signInWithEmailAndPassword(auth, userEmail, userPassword)
+
       navigate('/forms-verb', { replace: true })
     } catch (error) {
       console.error(error)

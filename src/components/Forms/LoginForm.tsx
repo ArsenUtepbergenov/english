@@ -1,19 +1,26 @@
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
+import { useState } from 'react'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
 import { green } from '@mui/material/colors'
+import Container from '@mui/material/Container'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 import Copyright from 'components/Texts/Copyright'
 import { Link } from 'react-router-dom'
 import { LoginFormProps } from './forms.types'
 
 export default function LoginForm({ login }: LoginFormProps) {
+  const [rememberMe, setRememberMe] = useState(true)
+
+  const handleRememberMeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRememberMe(event.target.checked)
+  }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -23,7 +30,7 @@ export default function LoginForm({ login }: LoginFormProps) {
 
     if (email && password) {
       try {
-        login({ userEmail: email as string, userPassword: password as string })
+        login({ userEmail: email as string, userPassword: password as string, rememberMe })
       } catch (error) {
         console.error(error)
       }
@@ -68,7 +75,13 @@ export default function LoginForm({ login }: LoginFormProps) {
             autoComplete="current-password"
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={
+              <Checkbox
+                checked={rememberMe}
+                onChange={handleRememberMeChange}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            }
             label="Remember me"
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>

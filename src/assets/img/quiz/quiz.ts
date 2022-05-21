@@ -11,7 +11,7 @@ type Question = {
   answers: Answer[]
 }
 
-export const questions: Question[] = [
+const questions: Question[] = [
   {
     id: 1,
     word: 'Гора',
@@ -68,3 +68,4 @@ function getQuestion() {
 }
 
 export const getNextQuestion = getQuestion()
+export const numberQuestions = questions.length

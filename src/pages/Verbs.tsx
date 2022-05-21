@@ -21,12 +21,12 @@ function Verbs() {
   const pastSimple = useRef<HTMLInputElement | null>(null)
   const pastParticiple = useRef<HTMLInputElement | null>(null)
 
-  const handlePastSimpleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    checkPastSimple(e.target)
+  const handlePastSimpleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    checkPastSimple(event.target)
   }
 
-  const handlePastParticipleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    checkPastParticiple(e.target)
+  const handlePastParticipleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    checkPastParticiple(event.target)
   }
 
   const reset = () => {

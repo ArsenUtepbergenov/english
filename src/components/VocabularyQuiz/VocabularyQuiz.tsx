@@ -1,18 +1,19 @@
-import { useState } from 'react'
-import { useSnackbar, VariantType } from 'notistack'
-import { Box, Typography, Grid } from '@mui/material'
-import DefaultCard from 'components/Cards/DefaultCard'
-import Score from 'components/Texts/Score'
+import { Box, Grid, Typography } from '@mui/material'
+import { Answer, getNextQuestion, numberQuestions } from 'assets/img/quiz/quiz'
 import DefaultButton from 'components/Buttons/DefaultButton'
-import useCounter from 'hooks/useCounter'
-import { Answer, getNextQuestion } from 'assets/img/quiz/quiz'
+import DefaultCard from 'components/Cards/DefaultCard'
+import Progress from 'components/Progress/Progress'
+import { INCREASE, ProgressContext } from 'components/Progress/progress.context'
+import { useSnackbar, VariantType } from 'notistack'
+import { useContext, useState } from 'react'
 import { getSuccessfulMessage } from 'utils'
 
 const correctAnswerStyle = '#9fcd69 solid 4px'
+const increasedValue = 100 / numberQuestions
 const initialQuestion = getNextQuestion(0)
 
 function VocabularyQuiz() {
-  const counter = useCounter()
+  const { dispatch } = useContext(ProgressContext)
   const [question, setQuestion] = useState(initialQuestion)
   const [userAnswerId, setUserAnswerId] = useState<number | null>(null)
   const { enqueueSnackbar } = useSnackbar()
@@ -29,7 +30,7 @@ function VocabularyQuiz() {
     if (question.correctId === userAnswerId) {
       setQuestion(getNextQuestion())
       setUserAnswerId(null)
-      counter.add(1)
+      dispatch({ type: INCREASE, value: increasedValue })
       showAnswerState(getSuccessfulMessage(), 'success')
     } else {
       showAnswerState('The answer is wrong!', 'error')
@@ -37,12 +38,16 @@ function VocabularyQuiz() {
   }
 
   return (
-    <section>
+    <>
       <Box mb={1}>
-        <Box mb={3}>
+        <Box mb={2}>
           <Typography variant="h4" align="center" color="text.secondary">
             Select translation of "{question?.word}"
           </Typography>
+        </Box>
+
+        <Box mb={3}>
+          <Progress />
         </Box>
         <Grid container spacing={3}>
           {question?.answers?.map(({ id, img, text }: Answer) => (
@@ -60,22 +65,15 @@ function VocabularyQuiz() {
           ))}
         </Grid>
       </Box>
-      <Box mt={3}>
-        <Grid container justifyContent="flex-end" alignItems="center" spacing={2}>
-          <Grid item>
-            <Score value={counter.count} />
-          </Grid>
-          <Grid item>
-            <DefaultButton
-              click={handleAnswer}
-              buttonProps={{ size: 'medium', disabled: userAnswerId === null }}
-            >
-              Submit
-            </DefaultButton>
-          </Grid>
-        </Grid>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+        <DefaultButton
+          click={handleAnswer}
+          buttonProps={{ size: 'medium', disabled: userAnswerId === null }}
+        >
+          Submit
+        </DefaultButton>
       </Box>
-    </section>
+    </>
   )
 }
 

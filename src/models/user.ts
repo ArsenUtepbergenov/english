@@ -10,4 +10,5 @@ export type UserData = {
   name?: string
   userEmail: string
   userPassword: string
+  rememberMe?: boolean
 }
