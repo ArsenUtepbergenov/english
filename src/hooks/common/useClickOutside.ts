@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { RefObject, useEffect } from 'react'
 import useLatest from './useLatest'
 
 export default function useClickOutside(
-  ref: React.MutableRefObject<Element>,
-  handler: any,
+  ref: RefObject<HTMLElement>,
+  handler: () => void,
   attached = true,
 ) {
   const latestHandler = useLatest(handler)
@@ -11,9 +11,9 @@ export default function useClickOutside(
   useEffect(() => {
     if (!attached) return
 
-    const handleClick = (e: any) => {
+    const handleClick = (e: MouseEvent) => {
       if (!ref.current) return
-      if (!ref.current.contains(e.target)) latestHandler.current()
+      if (!ref.current.contains(e.target as Node)) latestHandler.current()
     }
 
     document.addEventListener('click', handleClick)
